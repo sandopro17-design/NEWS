@@ -1,6 +1,6 @@
 # TrueFlow
 
-**Repository:** [github.com/sandopro17-design/trueflow](https://github.com/sandopro17-design/trueflow)
+**Repository canonico:** [github.com/sandopro17-design/NEWS](https://github.com/sandopro17-design/NEWS) — *legacy mirror:* [trueflow](https://github.com/sandopro17-design/trueflow)
 
 Social network in cui le persone seguono persone (modello LinkedIn), con tag e metatag configurabili che alimentano feed RSS collegati a **fonti certificate e verificate**. Nessun algoritmo “potrebbe piacerti”: solo informazioni verticali scelte dall’utente.
 
@@ -47,6 +47,16 @@ L’app sarà pubblicata su GitHub Pages all’URL:
 `https://<username>.github.io/trueflow/`
 
 (configurazione `base` in Vite e workflow `deploy.yml` — subtask DevOps).
+
+### Deep-link SPA (GitHub Pages)
+
+Per supportare refresh/apertura diretta delle route client-side (`/trueflow/feed`, `/trueflow/profile`, `/trueflow/settings`), la build copia automaticamente `dist/index.html` in `dist/404.html` (`scripts/copy-spa-404.mjs`).
+
+Comportamento atteso in produzione:
+
+- deep-link su route protette con utente non autenticato -> redirect a `/trueflow/auth`
+- utente autenticato ma senza `display_name` -> redirect a `/trueflow/onboarding`
+- utente autenticato con profilo completo -> accesso alla route richiesta (`feed`, `profile`, `settings`)
 
 ## Branch protection
 

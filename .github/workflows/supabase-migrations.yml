@@ -1,0 +1,42 @@
+# Applica le migrazioni in supabase/migrations/*.sql sul database Postgres hosted (Supabase).
+# Richiede secret SUPABASE_DB_URL: connection string (Settings → Database), password URI-escaped.
+# Dopo push verde qui: lanciare manualmente "RSS Poller" per smoke ingest.
+
+name: Supabase migrations
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: supabase-migrations
+  cancel-in-progress: true
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Validate SUPABASE_DB_URL
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          if [ -z "$SUPABASE_DB_URL" ]; then
+            echo "::error::Aggiungere il secret SUPABASE_DB_URL nel repository (connection string Postgres del progetto Supabase)." >&2
+            exit 1
+          fi
+
+      - name: Push migrations
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          set -euo pipefail
+          supabase db push --db-url "$SUPABASE_DB_URL" --yes
