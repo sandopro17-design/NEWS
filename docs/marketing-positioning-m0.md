@@ -29,3 +29,27 @@ I feed social e le homepage “personalizzate” ottimizzano il coinvolgimento, 
 ## Nota M0
 
 Fino a beta pubblica il positioning resta **interno e da affinare** con dati utente; questo documento è la base per landing, copy in-app e devrel.
+
+## Policy proposta fonti RSS (M0)
+
+Obiettivo: mantenere coerenza con la promessa "fonti verificate" senza rallentare eccessivamente l'onboarding.
+
+### Criteri minimi di ammissione (trust criteria)
+
+- Fonte identificabile (testata, organizzazione, autore o progetto con ownership chiara).
+- Feed RSS attivo e stabile, con storico recente e struttura consistente.
+- Presenza di pagina "about", contatti o riferimenti editoriali verificabili.
+- Assenza prevalente di pattern clickbait, scraping opaco o contenuti manipolativi.
+- Coerenza tematica con almeno un tag/metatag gia presente nel modello.
+
+### Disclosure verso utente
+
+- "Fonte verificata" indica conformita ai criteri interni pubblicati, non garanzia assoluta di accuratezza.
+- Ogni articolo resta tracciato alla fonte di origine in whitelist.
+- Le fonti possono essere sospese o rimosse se non rispettano piu i criteri.
+
+### Tono di comunicazione policy
+
+- Linguaggio chiaro e non legale: spiegare cosa controlliamo e cosa non possiamo garantire.
+- Nessuna promessa assoluta ("zero errori", "solo verita"): usare formule verificabili.
+- Invitare segnalazioni utenti come parte del controllo qualita continuo.

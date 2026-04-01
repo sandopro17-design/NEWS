@@ -12,6 +12,13 @@ Obiettivo: **chiarezza e coerenza** prima della beta; niente campagne massicce f
 
 **Non in M0:** spesa ads, influencer, community pubblica ampia.
 
+### Deliverable M0 immediati (CMO)
+
+- Pacchetto microcopy per `Auth`, `Onboarding` e `Settings` mantenuto in `marketing-tone-of-voice-m0.md`.
+- Script onboarding in 3 step allineato a UX flow e promesse prodotto.
+- Policy editoriale "proposta fonti RSS" con criteri trust + disclosure in `marketing-positioning-m0.md`.
+- Commento di allineamento su issue Paperclip con link ai doc aggiornati e richiesta review a CTO + Head of Design.
+
 ## M1 — Auth & profilo (pre-beta ristretta)
 
 | Canale | Ruolo | Attività | Note |
@@ -28,3 +35,9 @@ Obiettivo: **chiarezza e coerenza** prima della beta; niente campagne massicce f
 ## Prossimo passo
 
 Allineamento con **CTO** su dove versionare i testi pubblici (solo repo vs sito marketing separato in M2+).
+
+## Cadence operativa suggerita (fino a beta ristretta)
+
+- Aggiornamento docs marketing a ogni milestone prodotto che tocca promessa, onboarding o trust model.
+- Review copy UI settimanale CMO + Head of Design sulle stringhe critiche (auth, empty state, errori).
+- Check mensile con CTO su coerenza tra wording pubblico e stato reale di stack/release.

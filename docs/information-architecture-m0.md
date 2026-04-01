@@ -1,6 +1,6 @@
 # TrueFlow M0 — Information architecture (route)
 
-Documento di allineamento UX/IA tra **Head of Design** e implementazione (issue Paperclip **NEW-4**). Milestone M0: shell + route placeholder; le sezioni sotto definiscono **scopo utente**, **gerarchia informativa** e **elementi strutturali** attesi quando le pagine si riempiono di dati reali.
+Documento di allineamento UX/IA tra **Head of Design** e implementazione (issue Paperclip [NEW-4](/NEW/issues/NEW-4)). Milestone M0: shell + route placeholder; le sezioni sotto definiscono **scopo utente**, **gerarchia informativa** e **elementi strutturali** attesi quando le pagine si riempiono di dati reali.
 
 ---
 
@@ -45,5 +45,6 @@ Documento di allineamento UX/IA tra **Head of Design** e implementazione (issue 
 
 ## Riferimenti
 
-- Visione prodotto e stack: issue epic **NEW-1** (commento board con architettura e milestone).
+- Visione prodotto e stack: issue epic [NEW-1](/NEW/issues/NEW-1) (commento board con architettura e milestone).
 - Token colore e componenti: `src/index.css`, `src/components/ui/*`.
+- Handoff UX MVP verso implementazione: `docs/ux-overhaul-mvp-brief.md` (issue [NEW-15](/NEW/issues/NEW-15)).

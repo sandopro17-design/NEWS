@@ -1,14 +1,12 @@
-import { useState } from 'react'
-import { Badge, Button, Input } from '../components/ui'
+import { Link } from 'react-router-dom'
+import { Button } from '../components/ui'
+import { useAuth } from '../providers/useAuth'
 import { useAppStore, type ThemeMode } from '../store/useAppStore'
 
 export function SettingsPage() {
+  const { user } = useAuth()
   const theme = useAppStore((s) => s.theme)
   const setTheme = useAppStore((s) => s.setTheme)
-  const userTags = useAppStore((s) => s.userTags)
-  const addUserTag = useAppStore((s) => s.addUserTag)
-  const removeUserTag = useAppStore((s) => s.removeUserTag)
-  const [tagDraft, setTagDraft] = useState('')
 
   const options: { mode: ThemeMode; label: string }[] = [
     { mode: 'dark', label: 'Scuro' },
@@ -22,7 +20,15 @@ export function SettingsPage() {
           Impostazioni
         </h1>
         <p className="mt-2 text-muted">
-          Aspetto, tag, metatag e preferenze (in evoluzione).
+          Aspetto dell&apos;app e preferenze base dell&apos;account. La configurazione del feed (tag,
+          metatag, fonti) vive nel{' '}
+          <Link
+            to="/profile"
+            className="font-medium text-primary underline-offset-2 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded-sm"
+          >
+            Profilo
+          </Link>
+          .
         </p>
       </div>
 
@@ -46,56 +52,19 @@ export function SettingsPage() {
           ))}
         </div>
       </section>
-
-      <section className="space-y-3">
-        <h2 className="text-sm font-medium text-foreground">Tag feed (locale)</h2>
+      <section className="space-y-2 rounded-lg border border-border bg-surface/40 p-4">
+        <h2 className="text-sm font-medium text-foreground">Account</h2>
         <p className="text-sm text-muted">
-          Preferenze salvate in browser con Zustand <code>persist</code> (chiave{' '}
-          <code className="text-foreground">trueflow-app</code>) — allineato a M0
-          foundation.
+          Identità e campi del profilo pubblico si modificano da{' '}
+          <Link
+            to="/profile"
+            className="font-medium text-primary underline-offset-2 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded-sm"
+          >
+            Profilo
+          </Link>
+          ; qui restano solo tema e riepilogo accesso.
         </p>
-        <form
-          className="flex max-w-md flex-col gap-2 sm:flex-row sm:items-end"
-          onSubmit={(e) => {
-            e.preventDefault()
-            addUserTag(tagDraft)
-            setTagDraft('')
-          }}
-        >
-          <div className="min-w-0 flex-1 space-y-2">
-            <label htmlFor="settings-tag" className="text-sm text-muted">
-              Aggiungi tag
-            </label>
-            <Input
-              id="settings-tag"
-              value={tagDraft}
-              onChange={(e) => setTagDraft(e.target.value)}
-              placeholder="es. tech, climate…"
-            />
-          </div>
-          <Button type="submit" variant="secondary" size="sm">
-            Aggiungi
-          </Button>
-        </form>
-        {userTags.length > 0 ? (
-          <ul className="flex flex-wrap gap-2">
-            {userTags.map((t) => (
-              <li key={t} className="inline-flex items-center gap-1">
-                <Badge tone="accent">{t}</Badge>
-                <button
-                  type="button"
-                  className="rounded-md px-1.5 text-sm text-muted hover:bg-surface-elevated hover:text-foreground"
-                  onClick={() => removeUserTag(t)}
-                  aria-label={`Rimuovi tag ${t}`}
-                >
-                  ×
-                </button>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="text-sm text-subtle">Nessun tag ancora.</p>
-        )}
+        <p className="text-sm text-subtle">Utente attivo: {user?.email ?? 'non disponibile'}</p>
       </section>
     </div>
   )

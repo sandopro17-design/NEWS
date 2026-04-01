@@ -8,6 +8,25 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   base: '/trueflow/',
   plugins: [react(), tailwindcss()],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('/node_modules/react/') || id.includes('/node_modules/react-dom/')) {
+            return 'react-vendor'
+          }
+
+          if (id.includes('/node_modules/react-router-dom/')) {
+            return 'router-vendor'
+          }
+
+          if (id.includes('/node_modules/@supabase/supabase-js/')) {
+            return 'supabase-vendor'
+          }
+        },
+      },
+    },
+  },
   test: {
     environment: 'jsdom',
     setupFiles: ['./src/vitest.setup.ts'],

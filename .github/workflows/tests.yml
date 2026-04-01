@@ -1,4 +1,4 @@
-# CI su PR (e push su main): install, lint, test — stack TrueFlow (Vite + React).
+# CI su PR (e push su main): install, lint, test, build — stack TrueFlow (Vite + React).
 
 name: Tests
 
@@ -33,3 +33,6 @@ jobs:
 
       - name: Test
         run: npm run test
+
+      - name: Build
+        run: npm run build

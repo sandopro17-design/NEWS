@@ -23,3 +23,44 @@ Per il pubblico **devrel e builder**, enfatizziamo **trasparenza architetturale*
 - **Privilegiare:** fonti verificate, feed RSS, tag, controllo, trasparenza, cronologia, whitelist, verticalità.
 - **Usare con cautela:** “senza algoritmo” (specificare: niente raccomandazioni tipo “per te”).
 - **Evitare:** “disruptive”, “revolutionary”, promesse su scale o numeri di fonti non ancora reali in prodotto.
+
+## Microcopy operativo (M0, pronto integrazione UI)
+
+### Auth
+
+- **Titolo login:** Accedi al tuo flusso verificato
+- **Titolo registrazione:** Crea il tuo spazio informativo
+- **Descrizione unica:** Email e password per iniziare. Nessun feed "per te": scegli tu cosa seguire.
+- **Label password:** Password (minimo 8 caratteri)
+- **Placeholder nome visualizzato:** es. Mario Rossi
+- **CTA login:** Accedi
+- **CTA signup:** Crea account
+- **Feedback signup:** Registrazione inviata. Controlla la tua email per confermare l'account.
+- **Errore generico auth:** Accesso non riuscito. Verifica email e password, poi riprova.
+
+### Onboarding
+
+- **Titolo:** Completa il tuo profilo
+- **Descrizione:** Bastano nome e headline per iniziare a seguire persone e costruire i tuoi feed.
+- **Label headline:** Headline professionale (opzionale)
+- **CTA primaria:** Continua
+- **Errore nome mancante:** Inserisci un nome visualizzato per procedere.
+- **Conferma salvataggio (eventuale toast):** Profilo salvato. Ora imposta i tuoi tag.
+
+### Settings (tag, metatag, mapping)
+
+- **Sottotitolo pagina:** Definisci i temi che contano per te e collega solo fonti verificate.
+- **Tag helper:** Un tag rappresenta un tema principale (es. sicurezza, AI, fintech).
+- **Metatag helper:** Un metatag raggruppa piu tag in un sotto-dominio.
+- **Mapping helper:** Collega ogni tag a una o piu fonti verificate per alimentare il feed RSS.
+- **Empty state tag:** Nessun tag ancora. Aggiungi il primo tema che vuoi monitorare.
+- **Empty state mapping:** Nessun collegamento tag/fonte ancora. Crea un mapping per popolare il feed.
+- **Errore mapping:** Collegamento non riuscito. Riprova tra pochi secondi.
+
+## Script onboarding (3 step)
+
+1. **Identita:** "Crea il tuo profilo in meno di un minuto."
+2. **Scelta temi:** "Aggiungi i tag che vuoi seguire: TrueFlow usa le tue scelte, non raccomandazioni opache."
+3. **Qualita fonti:** "Collega i tag a fonti verificate e costruisci un feed verticale e tracciabile."
+
+Nota: in UI utente usare "sotto-temi" come alias di "metatag" al primo contatto.
