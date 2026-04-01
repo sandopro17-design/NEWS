@@ -1,0 +1,88 @@
+@import 'tailwindcss';
+
+/* TrueFlow semantic tokens — light */
+html {
+  color-scheme: light;
+  --tf-bg: oklch(0.985 0.004 250);
+  --tf-surface: oklch(1 0 0);
+  --tf-surface-elevated: oklch(0.97 0.008 250);
+  --tf-border: oklch(0.88 0.02 250);
+  --tf-fg: oklch(0.22 0.04 250);
+  --tf-fg-muted: oklch(0.45 0.03 250);
+  --tf-fg-subtle: oklch(0.55 0.02 250);
+  /* Primary: blu/teal — affidabilità, informazione */
+  --tf-primary: oklch(0.52 0.12 230);
+  --tf-primary-hover: oklch(0.45 0.12 230);
+  --tf-primary-fg: oklch(0.99 0 0);
+  /* Accent: arancione/ambra — azione, tag */
+  --tf-accent: oklch(0.72 0.16 55);
+  --tf-accent-hover: oklch(0.65 0.17 50);
+  --tf-accent-fg: oklch(0.2 0.04 55);
+  /* Semantic */
+  --tf-success: oklch(0.55 0.14 150);
+  --tf-verified: oklch(0.52 0.12 160);
+  --tf-warning: oklch(0.78 0.15 85);
+  --tf-error: oklch(0.55 0.2 25);
+}
+
+/* Dark — default shell TrueFlow */
+html.dark {
+  color-scheme: dark;
+  --tf-bg: oklch(0.16 0.02 250);
+  --tf-surface: oklch(0.2 0.025 250);
+  --tf-surface-elevated: oklch(0.24 0.03 250);
+  --tf-border: oklch(0.32 0.03 250);
+  --tf-fg: oklch(0.96 0.01 250);
+  --tf-fg-muted: oklch(0.72 0.02 250);
+  --tf-fg-subtle: oklch(0.58 0.02 250);
+  --tf-primary: oklch(0.72 0.12 195);
+  --tf-primary-hover: oklch(0.78 0.11 195);
+  --tf-primary-fg: oklch(0.15 0.04 250);
+  --tf-accent: oklch(0.78 0.14 65);
+  --tf-accent-hover: oklch(0.82 0.13 70);
+  --tf-accent-fg: oklch(0.2 0.05 60);
+  --tf-success: oklch(0.68 0.14 155);
+  --tf-verified: oklch(0.7 0.12 165);
+  --tf-warning: oklch(0.82 0.14 90);
+  --tf-error: oklch(0.65 0.18 25);
+}
+
+@theme {
+  --font-sans: 'Source Sans 3', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--tf-bg);
+  --color-surface: var(--tf-surface);
+  --color-surface-elevated: var(--tf-surface-elevated);
+  --color-border: var(--tf-border);
+  --color-foreground: var(--tf-fg);
+  --color-muted: var(--tf-fg-muted);
+  --color-subtle: var(--tf-fg-subtle);
+  --color-primary: var(--tf-primary);
+  --color-primary-hover: var(--tf-primary-hover);
+  --color-primary-fg: var(--tf-primary-fg);
+  --color-accent: var(--tf-accent);
+  --color-accent-hover: var(--tf-accent-hover);
+  --color-accent-fg: var(--tf-accent-fg);
+  --color-success: var(--tf-success);
+  --color-verified: var(--tf-verified);
+  --color-warning: var(--tf-warning);
+  --color-error: var(--tf-error);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+}

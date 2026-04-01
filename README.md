@@ -1,26 +1,57 @@
-# NEWS — progetto
+# TrueFlow
 
-Workspace del prodotto NEWS (social / feed RSS su fonti certificate).
+**Repository:** [github.com/sandopro17-design/trueflow](https://github.com/sandopro17-design/trueflow)
 
-| Area | Contenuto |
-|------|-----------|
-| `docs/` | Documentazione operativa (opzionale) |
+Social network in cui le persone seguono persone (modello LinkedIn), con tag e metatag configurabili che alimentano feed RSS collegati a **fonti certificate e verificate**. Nessun algoritmo “potrebbe piacerti”: solo informazioni verticali scelte dall’utente.
 
-## Repository Git
+## Stack tecnico
 
-- **Remoto:** https://github.com/sandopro17-design/NEWS  
-- In locale: `origin` → `https://github.com/sandopro17-design/NEWS.git`
+| Area        | Tecnologia                          |
+|------------|--------------------------------------|
+| Frontend   | React 18, Vite                       |
+| Styling    | Tailwind CSS                         |
+| Backend    | Supabase (Auth, Postgres, RLS)       |
+| Hosting    | GitHub Pages                         |
+| CI/CD      | GitHub Actions                       |
 
-Aggiornamenti:
+## Struttura repository
 
-```bash
-cd /home/matteo/Gianni/projects/news
-git add -A && git commit -m "messaggio"
-git push -u origin main
+```
+src/           # Applicazione React (scaffold Vite — vedi subtask frontend)
+workers/       # Edge/worker e job (futuro)
+supabase/      # Migrazioni SQL, config CLI Supabase
+docs/          # Architettura, fonti verificate, guide operative
 ```
 
-Se `git push` chiede le credenziali: usa **Personal Access Token** come password (HTTPS) oppure `gh auth login`, oppure imposta un remote SSH (`git@github.com:sandopro17-design/NEWS.git`).
+## Sviluppo locale
 
-## Paperclip
+Dopo lo scaffold Vite (subtask dedicato):
 
-Company **NEWS** in Paperclip: progetto con workspace primario che punta a questa cartella e al remoto sopra (allineamento come per UNITI → `projects/uniti`).
+```bash
+npm install
+cp .env.example .env.local   # valorizzare VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY
+npm run dev
+```
+
+## Variabili ambiente
+
+Definire in `.env.local` (non committato):
+
+- `VITE_SUPABASE_URL`
+- `VITE_SUPABASE_ANON_KEY`
+
+## Deploy
+
+L’app sarà pubblicata su GitHub Pages all’URL:
+
+`https://<username>.github.io/trueflow/`
+
+(configurazione `base` in Vite e workflow `deploy.yml` — subtask DevOps).
+
+## Branch protection
+
+Su `main` è richiesta **protezione con pull request** (nessun push diretto). Istruzioni operative: [docs/branch-protection.md](docs/branch-protection.md).
+
+## Contribuire
+
+Vedi [CONTRIBUTING.md](CONTRIBUTING.md).

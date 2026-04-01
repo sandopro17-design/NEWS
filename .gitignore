@@ -1,16 +1,44 @@
-# Python
-__pycache__/
-*.py[cod]
-*.egg-info/
-.venv/
-venv/
+# Dependencies
+node_modules/
 
-# Env e segreti
+# Build
+dist/
+dist-ssr/
+*.local
+
+# Environment
 .env
 .env.*
-*.pem
+!.env.example
 
-# OS / editor
+# Logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor / OS
 .DS_Store
 Thumbs.db
-*~
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json.example
+
+# Vite / tooling
+*.tsbuildinfo
+.vite/
+coverage/
+.nyc_output/
+
+# Supabase
+.branches/
+.temp/
+supabase/.temp/
+
+# Misc
+*.swp
+*.swo
+.cache/
