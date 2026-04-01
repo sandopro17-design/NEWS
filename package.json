@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build && node scripts/copy-spa-404.mjs",
     "lint": "eslint .",
     "test": "vitest run",
+    "smoke:hosted": "node scripts/hosted-smoke.mjs",
     "smoke:rss": "node scripts/rss-pipeline-smoke.mjs",
     "report:rss": "node scripts/rss-runtime-report.mjs",
     "worker:rss:upsert": "node scripts/rss-ingest-upsert-smoke.mjs",
