@@ -1,0 +1,57 @@
+name: RSS Poller Readiness
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/30 * * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rss-poller-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  readiness:
+    runs-on: ubuntu-latest
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      RSS_MIN_TRUST_SCORE: ${{ vars.RSS_MIN_TRUST_SCORE }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Validate required secrets
+        run: |
+          test -n "$SUPABASE_URL" || (echo "SUPABASE_URL missing" && exit 1)
+          test -n "$SUPABASE_SERVICE_ROLE_KEY" || (echo "SUPABASE_SERVICE_ROLE_KEY missing" && exit 1)
+          echo "RSS_MIN_TRUST_SCORE=${RSS_MIN_TRUST_SCORE:-40}" >> "$GITHUB_ENV"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run RSS worker (smoke + runtime report)
+        run: npm run worker:rss
+
+      - name: Run RSS upsert RPC smoke
+        run: npm run worker:rss:upsert
+
+      - name: Upload RSS smoke artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: rss-smoke-result
+          path: artifacts/rss-smoke-result.json
+
+      - name: Upload RSS runtime + upsert artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: rss-runtime-and-upsert
+          path: |
+            artifacts/rss-runtime-metrics.json
+            artifacts/rss-upsert-smoke.json
