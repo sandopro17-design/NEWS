@@ -2,7 +2,7 @@
  * Smoke post-deploy (Pages + Edge Function search-ai).
  *
  * Uso (dopo secrets GitHub + deploy Pages + deploy function + GEMINI_API_KEY):
- *   HOSTED_PAGES_URL=https://<org>.github.io/trueflow \
+ *   HOSTED_PAGES_URL=https://<org>.github.io/NEWS \
  *   SUPABASE_URL=https://<ref>.supabase.co \
  *   SUPABASE_ANON_KEY=<anon-jwt> \
  *   node scripts/hosted-smoke.mjs
@@ -17,7 +17,7 @@ function fail(message) {
 }
 
 if (!pagesBase) {
-  fail('HOSTED_PAGES_URL mancante (es. https://org.github.io/trueflow)')
+  fail('HOSTED_PAGES_URL mancante (es. https://org.github.io/NEWS)')
 }
 if (!supabaseUrl) {
   fail('SUPABASE_URL mancante')

@@ -1,6 +1,6 @@
 /**
  * GitHub Pages serves 404.html for unknown paths. Copying the SPA shell lets
- * client-side routes (e.g. /trueflow/feed) work on hard refresh / deep links.
+ * client-side routes (e.g. /NEWS/feed) work on hard refresh / deep links.
  */
 import { copyFileSync } from 'node:fs'
 import { resolve } from 'node:path'

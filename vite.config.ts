@@ -4,15 +4,18 @@ import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
-// GitHub Pages: https://<user>.github.io/trueflow/
+// GitHub Pages (repo NEWS): https://<user>.github.io/NEWS/
 export default defineConfig({
-  base: '/trueflow/',
+  base: '/NEWS/',
   plugins: [react(), tailwindcss()],
   build: {
     rollupOptions: {
       output: {
         manualChunks(id) {
-          if (id.includes('/node_modules/react/') || id.includes('/node_modules/react-dom/')) {
+          if (
+            id.includes('/node_modules/react/') ||
+            id.includes('/node_modules/react-dom/')
+          ) {
             return 'react-vendor'
           }
 

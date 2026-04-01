@@ -12,16 +12,16 @@ Social orientato al **segui persone** (stile LinkedIn), con **tag e metatag** ch
 
 ## Stack (stato attuale)
 
-| Layer | Tecnologia | Note operative |
-| --- | --- | --- |
-| Frontend | React 18, TypeScript, Vite 8 | SPA |
-| Styling | Tailwind CSS 4 (`@tailwindcss/vite`) | Token in `src/index.css` (`--tf-*`) |
-| Routing | `react-router-dom` | `BrowserRouter` in `main.tsx`; route in `App.tsx` |
-| Stato client | Zustand | `src/store/useAppStore.ts` |
-| Backend | Supabase | Auth, Postgres, RLS (migrazioni in `supabase/migrations/`) |
-| Hosting statico | GitHub Pages | `base: '/trueflow/'` in `vite.config.ts` |
-| CI/CD | GitHub Actions | `tests.yml` (lint + test), `deploy.yml` (build + Pages) |
-| Orchestrazione task | Paperclip | Issue, agenti, governance (fuori da questo repo) |
+| Layer               | Tecnologia                           | Note operative                                             |
+| ------------------- | ------------------------------------ | ---------------------------------------------------------- |
+| Frontend            | React 18, TypeScript, Vite 8         | SPA                                                        |
+| Styling             | Tailwind CSS 4 (`@tailwindcss/vite`) | Token in `src/index.css` (`--tf-*`)                        |
+| Routing             | `react-router-dom`                   | `BrowserRouter` in `main.tsx`; route in `App.tsx`          |
+| Stato client        | Zustand                              | `src/store/useAppStore.ts`                                 |
+| Backend             | Supabase                             | Auth, Postgres, RLS (migrazioni in `supabase/migrations/`) |
+| Hosting statico     | GitHub Pages                         | `base: '/NEWS/'` in `vite.config.ts` (nome repo canonico)  |
+| CI/CD               | GitHub Actions                       | `tests.yml` (lint + test), `deploy.yml` (build + Pages)    |
+| Orchestrazione task | Paperclip                            | Issue, agenti, governance (fuori da questo repo)           |
 
 **Opzionale / fasi successive (visione board):** worker RSS serverless (es. Cloudflare Workers o job schedulato GitHub Actions) per polling feed e popolamento `feed_items`; non è ancora implementato in M0.
 
@@ -79,17 +79,17 @@ La board ha proposto anche `workers/rss-poller/` e `lib/rss.js` — da aggiunger
 
 ## Route e information architecture
 
-| Path | Pagina | Scopo (M0+) |
-| --- | --- | --- |
-| `/` | Home | Value proposition / onboarding |
-| `/feed` | Feed | Lettura item da fonti verificate + filtri |
-| `/profile` | Profilo | Identità, tag, metatag, rete |
-| `/explore` | Esplora | Fonti e discovery curata |
-| `/settings` | Impostazioni | Account, tema, preferenze |
+| Path        | Pagina       | Scopo (M0+)                               |
+| ----------- | ------------ | ----------------------------------------- |
+| `/`         | Home         | Value proposition / onboarding            |
+| `/feed`     | Feed         | Lettura item da fonti verificate + filtri |
+| `/profile`  | Profilo      | Identità, tag, metatag, rete              |
+| `/explore`  | Esplora      | Fonti e discovery curata                  |
+| `/settings` | Impostazioni | Account, tema, preferenze                 |
 
 Dettaglio UX/gerarchia: **`docs/information-architecture-m0.md`**.
 
-**Base URL produzione:** con GitHub Pages il path pubblico include il segmento repository, es. `https://<org>.github.io/trueflow/` (coerente con `base` Vite).
+**Base URL produzione:** con GitHub Pages il path pubblico include il segmento repository del deploy, es. `https://<org>.github.io/NEWS/` per tutt’e due i repo elencati in README; `base` Vite deve coincidere con quel segmento.
 
 ---
 
@@ -97,15 +97,15 @@ Dettaglio UX/gerarchia: **`docs/information-architecture-m0.md`**.
 
 Implementato nelle migrazioni `20260401000000_initial_schema.sql` e policy in `20260401000001_rls_policies.sql`.
 
-| Tabella | Ruolo |
-| --- | --- |
-| `profiles` | Profilo 1:1 con `auth.users` |
-| `follows` | Relazione follower → followee |
-| `user_tags` | Tag verticali scelti dall’utente |
-| `user_metatags` | Metatag utente |
-| `user_tag_metatags` | Associazione tag ↔ metatag |
-| `verified_sources` | Fonti RSS in whitelist curata |
-| `feed_items` | Articoli/item collegati a una fonte verificata |
+| Tabella             | Ruolo                                          |
+| ------------------- | ---------------------------------------------- |
+| `profiles`          | Profilo 1:1 con `auth.users`                   |
+| `follows`           | Relazione follower → followee                  |
+| `user_tags`         | Tag verticali scelti dall’utente               |
+| `user_metatags`     | Metatag utente                                 |
+| `user_tag_metatags` | Associazione tag ↔ metatag                     |
+| `verified_sources`  | Fonti RSS in whitelist curata                  |
+| `feed_items`        | Articoli/item collegati a una fonte verificata |
 
 Rispetto al modello concettuale della board (trust score, categoria, `verified_by`, matching tag su item), M0 ha uno **schema minimale**; le colonne aggiuntive e la logica di scoring vanno pianificate in milestone dedicate (es. M2–M5).
 

@@ -1,4 +1,4 @@
-# Deploy static build to GitHub Pages (Vite + React; base path /trueflow/).
+# Deploy static build to GitHub Pages (Vite + React; base path /NEWS/).
 # Impostare in repo Settings → Pages → Source: GitHub Actions.
 # Opzionale: aggiungere secrets VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY per embed in build.
 
