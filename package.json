@@ -11,7 +11,7 @@
     "smoke:rss": "node scripts/rss-pipeline-smoke.mjs",
     "report:rss": "node scripts/rss-runtime-report.mjs",
     "worker:rss:upsert": "node scripts/rss-ingest-upsert-smoke.mjs",
-    "worker:rss": "npm run smoke:rss && npm run report:rss",
+    "worker:rss": "node workers/rss.mjs && npm run smoke:rss && npm run report:rss",
     "test:watch": "vitest",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
@@ -22,6 +22,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.0",
+    "rss-parser": "^3.13.0",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
