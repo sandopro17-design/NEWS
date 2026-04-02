@@ -1,0 +1,6 @@
+# Configurazione minima per Edge Functions (esteso da `supabase link` in locale).
+
+# false: compatibile con anon JWT legacy (eyJ…) e chiave publishable (sb_publishable_…);
+# il runtime non espone segreti; Gemini resta solo lato funzione.
+[functions.search-ai]
+verify_jwt = false
