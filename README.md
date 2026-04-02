@@ -58,6 +58,20 @@ Comportamento atteso in produzione:
 - utente autenticato ma senza `display_name` -> redirect a `/NEWS/onboarding`
 - utente autenticato con profilo completo -> accesso alla route richiesta (`feed`, `profile`, `settings`)
 
+### Smoke post-deploy (hosted)
+
+Eseguire **sempre dalla root del repository** (la cartella che contiene `package.json`, es. `~/Gianni/projects/news`), non da una directory padre generica:
+
+```bash
+cd /percorso/al/clone/NEWS
+HOSTED_PAGES_URL="https://sandopro17-design.github.io/NEWS" \
+SUPABASE_URL="https://<ref>.supabase.co" \
+SUPABASE_ANON_KEY="<anon-jwt>" \
+npm run smoke:hosted
+```
+
+Se npm segnala `ENOENT` su `package.json`, il `cd` non è sulla root del progetto.
+
 ## Branch protection
 
 Su `main` è richiesta **protezione con pull request** (nessun push diretto). Istruzioni operative: [docs/branch-protection.md](docs/branch-protection.md).
