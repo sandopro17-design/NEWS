@@ -1,6 +1,8 @@
 # Deploy static build to GitHub Pages (Vite + React; base path /NEWS/).
 # Impostare in repo Settings → Pages → Source: GitHub Actions.
-# Opzionale: aggiungere secrets VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY per embed in build.
+# Se deploy-pages fallisce con 404 "Creating Pages deployment failed": verificare che Pages sia
+# abilitato (stesso URL settings) e l'environment `github-pages` non sia bloccato al primo run.
+# Opzionale: secrets VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY (richiesti dallo step "Require Vite Supabase secrets").
 
 name: Deploy to GitHub Pages
 
