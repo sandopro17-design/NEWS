@@ -2,7 +2,13 @@
 # Impostare in repo Settings → Pages → Source: GitHub Actions.
 # Se deploy-pages fallisce con 404 "Creating Pages deployment failed": verificare che Pages sia
 # abilitato (stesso URL settings) e l'environment `github-pages` non sia bloccato al primo run.
-# Opzionale: secrets VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY (richiesti dallo step "Require Vite Supabase secrets").
+#
+# Due repository (stesso codice): `sandopro17-design/NEWS` (canonico Pages) vs `sandopro17-design/trueflow`.
+# Per evitare job rossi su trueflow senza Pages abilitato:
+# - build: sempre (artifact + validazione).
+# - deploy + smoke_hosted: solo se repo è NEWS oppure variable ENABLE_GH_PAGES=true (opt-in).
+# Opzionale: vars.HOSTED_PAGES_URL per smoke (default sotto nello step).
+# Secrets: VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY.
 
 name: Deploy to GitHub Pages
 
@@ -50,12 +56,15 @@ jobs:
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
         run: npm run build
 
-      - uses: actions/upload-pages-artifact@v3
+      - name: Upload Pages artifact
+        if: github.repository == 'sandopro17-design/NEWS' || vars.ENABLE_GH_PAGES == 'true'
+        uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
   deploy:
     needs: build
+    if: github.repository == 'sandopro17-design/NEWS' || vars.ENABLE_GH_PAGES == 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -63,3 +72,34 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  smoke_hosted:
+    needs: deploy
+    if: github.repository == 'sandopro17-design/NEWS' || vars.ENABLE_GH_PAGES == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Hosted smoke (Pages + search-ai)
+        env:
+          HOSTED_PAGES_URL: ${{ vars.HOSTED_PAGES_URL }}
+          SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          SMOKE_SEARCH_AI_MAX_ATTEMPTS: '4'
+          SMOKE_SEARCH_AI_RETRY_MS: '20000'
+        run: |
+          set -e
+          if [ -z "${HOSTED_PAGES_URL:-}" ]; then
+            owner="${GITHUB_REPOSITORY%%/*}"
+            repo="${GITHUB_REPOSITORY#*/}"
+            export HOSTED_PAGES_URL="https://${owner}.github.io/${repo}"
+          fi
+          npm run smoke:hosted
